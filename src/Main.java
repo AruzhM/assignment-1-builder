@@ -25,6 +25,7 @@ public class Main {
     }
 
  */
+       /*
         PowerSupply powerSupply =
                 new PowerSupply(750, "80 Plus gold");
 
@@ -44,6 +45,23 @@ public class Main {
                 .build();
 
         System.out.println("Computer is created!");
+    }
+}
+
+        */
+
+
+
+
+        ComputerDirector director = new ComputerDirector();
+
+        Computer basic = director.createBasicPC();
+        Computer gaming = director.createGamingPC();
+        Computer workstation = director.createWorkstationPC();
+
+        System.out.println("Basic PC created!");
+        System.out.println("Gaming PC created!");
+        System.out.println("Workstation PC created!");
     }
 }
 

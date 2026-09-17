@@ -1,4 +1,6 @@
 public class Computer {
+
+
     // Required
     private String name;
     private String cpu;
@@ -43,12 +45,14 @@ public class Computer {
     }
 
     public static class Builder {
+
+
         private String name;
         private String cpu;
         private int ram;
         private int storage;
-        private String gpu;
 
+        private String gpu;
         private boolean wifiEnable = false;
         private boolean bluetoothEnable = false;
         private String operatingSystem = "Windows 11";
@@ -68,47 +72,80 @@ public class Computer {
             this.gpu = gpu;
             return this;
         }
+
         public Builder enableWifi() {
             this.wifiEnable = true;
             return this;
         }
+
         public Builder enableBluetooth() {
             this.bluetoothEnable = true;
             return this;
         }
+
         public Builder operatingSystem(String operatingSystem) {
             this.operatingSystem = operatingSystem;
             return this;
         }
+
         public Builder coolingType(String coolingType) {
             this.coolingType = coolingType;
             return this;
         }
+
         public Builder enableRgb() {
             this.rgbEnable = true;
             return this;
         }
+
         public Builder powerSupply(PowerSupply powerSupply) {
             this.powerSupply = powerSupply;
             return this;
         }
 
-            public Computer build() {
-                return new Computer(
-                        name,
-                        cpu,
-                        ram,
-                        storage,
-                        gpu,
-                        wifiEnable,
-                        bluetoothEnable,
-                        operatingSystem,
-                        coolingType,
-                        rgbEnable,
-                        powerSupply
-                );
+        public Computer build() {
+            validate();
+
+            return new Computer(
+                    name,
+                    cpu,
+                    ram,
+                    storage,
+                    gpu,
+                    wifiEnable,
+                    bluetoothEnable,
+                    operatingSystem,
+                    coolingType,
+                    rgbEnable,
+                    powerSupply
+            );
+        }
+
+            private void validate() {
+
+                if (name == null || name.isBlank()) {
+                    throw new IllegalArgumentException("Computer name cannot be empty");
+                }
+
+                if (ram <= 0) {
+                    throw new IllegalArgumentException("RAM must be greater than 0");
+                }
+
+                if (storage <= 0) {
+                    throw new IllegalArgumentException("Storage must be greater than 0");
+                }
+
+                if (rgbEnable && (gpu == null || gpu.isBlank())) {
+                    throw new IllegalArgumentException("GPU is required when RGB is enabled");
+                }
+
+                if ("Liquid Cooling".equals(coolingType) && ram < 16) {
+                    throw new IllegalArgumentException(
+                            "Liquid Cooling requires at least 16 GB of RAM");
+                }
 
             }
         }
+
     }
 
