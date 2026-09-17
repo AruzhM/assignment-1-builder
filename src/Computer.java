@@ -121,31 +121,90 @@ public class Computer {
             );
         }
 
-            private void validate() {
 
-                if (name == null || name.isBlank()) {
-                    throw new IllegalArgumentException("Computer name cannot be empty");
-                }
 
-                if (ram <= 0) {
-                    throw new IllegalArgumentException("RAM must be greater than 0");
-                }
+        private void validate() {
+            validateRequiredFields();
+            validatePositiveValues();
+            validateDependencies();
+        }
 
-                if (storage <= 0) {
-                    throw new IllegalArgumentException("Storage must be greater than 0");
-                }
-
-                if (rgbEnable && (gpu == null || gpu.isBlank())) {
-                    throw new IllegalArgumentException("GPU is required when RGB is enabled");
-                }
-
-                if ("Liquid Cooling".equals(coolingType) && ram < 16) {
-                    throw new IllegalArgumentException(
-                            "Liquid Cooling requires at least 16 GB of RAM");
-                }
-
+        private void validateRequiredFields() {
+            if (name == null || name.isBlank()) {
+                throw new IllegalArgumentException(
+                        "Computer name cannot be empty"
+                );
             }
         }
 
+        private void validatePositiveValues() {
+            if (ram <= 0) {
+                throw new IllegalArgumentException(
+                        "RAM must be greater than 0"
+                );
+            }
+
+            if (storage <= 0)
+                throw new IllegalArgumentException(
+                        "Storage must be greater than 0");
+
+        }
+
+
+        private void validateDependencies() {
+            if (rgbEnable && (gpu == null || gpu.isBlank())) {
+                throw new IllegalArgumentException(
+                        "GPU is required when RGB is enabled");
+            }
+
+            if ("Liquid Cooling".equals(coolingType) && ram < 16) {
+                throw new IllegalArgumentException(
+                        "Liquid Cooling requires at least 16 GB of RAM");
+            }
+        }
     }
+    public String getName(){
+        return name;
+    }
+    public String getCpu() {
+        return cpu;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public int getStorage() {
+        return storage;
+    }
+
+    public String getGpu() {
+        return gpu;
+    }
+
+    public boolean isWifiEnable() {
+        return wifiEnable;
+    }
+
+    public boolean isBluetoothEnable() {
+        return bluetoothEnable;
+    }
+
+    public String getOperatingSystem() {
+        return operatingSystem;
+    }
+
+    public String getCoolingType() {
+        return coolingType;
+    }
+
+    public boolean isRgbEnable() {
+        return rgbEnable;
+    }
+
+    public PowerSupply getPowerSupply() {
+        return powerSupply;
+    }
+
+}
 
