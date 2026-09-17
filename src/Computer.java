@@ -32,6 +32,7 @@ public class Computer {
         this.name = name;
         this.cpu = cpu;
         this.ram = ram;
+        this.storage = storage;
         this.gpu = gpu;
         this.wifiEnable = wifiEnable;
         this.bluetoothEnable = bluetoothEnable;
@@ -41,5 +42,73 @@ public class Computer {
         this.powerSupply = powerSupply;
     }
 
+    public static class Builder {
+        private String name;
+        private String cpu;
+        private int ram;
+        private int storage;
+        private String gpu;
 
-}
+        private boolean wifiEnable = false;
+        private boolean bluetoothEnable = false;
+        private String operatingSystem = "Windows 11";
+        private String coolingType = "Air Cooling";
+        private boolean rgbEnable = false;
+
+        private PowerSupply powerSupply;
+
+        public Builder(String name, String cpu, int ram, int storage) {
+            this.name = name;
+            this.cpu = cpu;
+            this.ram = ram;
+            this.storage = storage;
+        }
+
+        public Builder gpu(String gpu) {
+            this.gpu = gpu;
+            return this;
+        }
+        public Builder enableWifi() {
+            this.wifiEnable = true;
+            return this;
+        }
+        public Builder enableBluetooth() {
+            this.bluetoothEnable = true;
+            return this;
+        }
+        public Builder operatingSystem(String operatingSystem) {
+            this.operatingSystem = operatingSystem;
+            return this;
+        }
+        public Builder coolingType(String coolingType) {
+            this.coolingType = coolingType;
+            return this;
+        }
+        public Builder enableRgb() {
+            this.rgbEnable = true;
+            return this;
+        }
+        public Builder powerSupply(PowerSupply powerSupply) {
+            this.powerSupply = powerSupply;
+            return this;
+        }
+
+            public Computer build() {
+                return new Computer(
+                        name,
+                        cpu,
+                        ram,
+                        storage,
+                        gpu,
+                        wifiEnable,
+                        bluetoothEnable,
+                        operatingSystem,
+                        coolingType,
+                        rgbEnable,
+                        powerSupply
+                );
+
+            }
+        }
+    }
+
